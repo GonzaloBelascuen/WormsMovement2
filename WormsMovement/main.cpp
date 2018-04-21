@@ -35,6 +35,7 @@ void dispatch(gameEvent event, void *userData);
 int main(void)
 {
 	// INITIALIZATION
+	int hola = 4;
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *allegro_event_queue;
 	ALLEGRO_TIMER *frameTimer = NULL;
