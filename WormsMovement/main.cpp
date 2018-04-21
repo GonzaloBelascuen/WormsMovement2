@@ -3,7 +3,6 @@
 
 #include "worm.h"
 #include "world.h"
-//#include "keyHandler.h"
 
 #include <stdio.h>
 #include <allegro5\allegro5.h>
@@ -34,7 +33,7 @@ void dispatch(gameEvent event, void *userData);
 
 int main(void)
 {
-	// INITIALIZATION
+	// ALLEGRO INITIALIZATION
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *allegro_event_queue;
 	ALLEGRO_TIMER *frameTimer = NULL;

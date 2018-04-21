@@ -127,17 +127,27 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="keyHandler.cpp" />
+    <ClCompile Include="drawWorld.cpp" />
+    <ClCompile Include="eventGenerator.cpp" />
+    <ClCompile Include="eventType.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="observer.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="SendMovement.cpp" />
     <ClCompile Include="world.cpp" />
     <ClCompile Include="worm.cpp" />
+    <ClCompile Include="WormEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="keyHandler.h" />
+    <ClInclude Include="drawWorld.h" />
+    <ClInclude Include="eventGenerator.h" />
+    <ClInclude Include="eventType.h" />
+    <ClInclude Include="observer.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="SendMovement.h" />
     <ClInclude Include="world.h" />
     <ClInclude Include="worm.h" />
+    <ClInclude Include="WormEvent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
