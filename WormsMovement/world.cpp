@@ -65,10 +65,8 @@ world::world()
 		}
 	}
 
-	worms = new worm[2];
-
-	worms[0].init(1000, 616, STILL_LEFT,walkImgs,jumpImgs);
-	worms[1].init(900, 616, STILL_LEFT, walkImgs, jumpImgs);
+	worms.push_back(worm(1000, 616, STILL_LEFT, walkImgs, jumpImgs));
+	worms.push_back(worm(900, 616, STILL_LEFT, walkImgs, jumpImgs));
 }
 
 world::~world()
@@ -94,13 +92,22 @@ world::~world()
 		fullDir = dirJump + strnum + extension;
 		al_destroy_bitmap(jumpImgs[i]);
 	}
-
-	delete[] worms;
 	
 	al_destroy_bitmap(background);
 	al_destroy_bitmap(scenario);
 	
 	free(walkImgs);
 	free(jumpImgs);
+}
+
+void world::addObserver(observer * obs)
+{
+	obsVector.push_back(obs);
+}
+
+void world::update(void * data)
+{
+	for (observer* obs : obsVector)
+		(*obs).update(this);
 }
 

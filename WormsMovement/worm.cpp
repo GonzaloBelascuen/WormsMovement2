@@ -1,7 +1,7 @@
 #include "worm.h"
 #include <iostream>
 
-void worm::init(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** _walkImgs, ALLEGRO_BITMAP ** _jumpImgs)
+worm::worm(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** _walkImgs, ALLEGRO_BITMAP ** _jumpImgs)
 {
 	pos.x = _xCoord;
 	pos.y = _yCoord;
@@ -10,6 +10,10 @@ void worm::init(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** 
 
 	walkImgs = _walkImgs;
 	jumpImgs = _jumpImgs;
+}
+
+worm::~worm()
+{
 }
 
 void worm::refresh()
@@ -88,7 +92,38 @@ void worm::refresh()
 	}
 	else if (state == JUMPING_RIGHT)
 	{
-		
+		switch (subState)
+		{
+		case JUMPING:
+			al_draw_bitmap(jumpImgs[jumpSequence[tickCount]], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
+			if (tickCount == 3)
+			{
+				subState = FLYING;
+				tickCount = 0;
+			}
+			break;
+		case FLYING:
+			pos.y = pos.y - 3.89711 + 0.24*tickCount;
+			pos.x += 2.25;
+			if (pos.y > 616)
+			{
+				pos.y = 616;
+				subState = LANDING;
+				tickCount = 0;
+			}
+			al_draw_bitmap(jumpImgs[4], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
+			break;
+		case LANDING:
+			al_draw_bitmap(jumpImgs[landingSequence[tickCount]], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
+			if (tickCount == 8)
+			{
+				this->event(END_OF_ACTION);
+				subState = JUMPING;
+				tickCount = 0;
+			}
+			break;
+		}
+		tickCount++;
 	}
 	else if (state == STILL_RIGHT)
 	{
@@ -108,19 +143,6 @@ void worm::event(wormEvent myWormEvent)
 void worm::resetTickCount()
 {
 	tickCount = 0;
-}
-
-
-worm::worm()
-{
-	pos.x = 0;
-	pos.y = 0;
-
-	state = STILL_LEFT;
-}
-
-worm::~worm()
-{
 }
 
 

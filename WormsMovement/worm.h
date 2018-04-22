@@ -22,10 +22,8 @@ private:
 	//unsigned int subTick;
 	jumpingSubState subState = JUMPING;
 public:
-	worm();
+	worm(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** _walkImgs, ALLEGRO_BITMAP ** _jumpImgs);
 	~worm();
-
-	void init(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** _walkImgs, ALLEGRO_BITMAP ** _jumpImgs);
 
 	void refresh();
 	void event(wormEvent myWormEvent);

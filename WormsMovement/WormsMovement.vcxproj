@@ -131,7 +131,6 @@
     <ClCompile Include="eventGenerator.cpp" />
     <ClCompile Include="keyboardEvent.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="observer.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="SendMovement.cpp" />
     <ClCompile Include="timerEvent.cpp" />

@@ -2,7 +2,6 @@
 class observer
 {
 public:
-	observer();
-	~observer();
+	virtual void update(void *data) = 0;
 };
 

@@ -2,11 +2,11 @@
 
 
 
+void drawWorld::update(void * data)
+{
+}
+
 drawWorld::drawWorld()
 {
 }
 
-
-drawWorld::~drawWorld()
-{
-}

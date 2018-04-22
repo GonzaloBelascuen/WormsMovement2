@@ -39,9 +39,6 @@
     <ClCompile Include="SendMovement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="observer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WormEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
