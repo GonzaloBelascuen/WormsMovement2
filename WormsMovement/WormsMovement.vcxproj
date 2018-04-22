@@ -129,11 +129,12 @@
   <ItemGroup>
     <ClCompile Include="drawWorld.cpp" />
     <ClCompile Include="eventGenerator.cpp" />
-    <ClCompile Include="eventType.cpp" />
+    <ClCompile Include="keyboardEvent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="observer.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="SendMovement.cpp" />
+    <ClCompile Include="timerEvent.cpp" />
     <ClCompile Include="world.cpp" />
     <ClCompile Include="worm.cpp" />
     <ClCompile Include="WormEvent.cpp" />
@@ -142,9 +143,12 @@
     <ClInclude Include="drawWorld.h" />
     <ClInclude Include="eventGenerator.h" />
     <ClInclude Include="eventType.h" />
+    <ClInclude Include="gameData.h" />
+    <ClInclude Include="keyboardEvent.h" />
     <ClInclude Include="observer.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="SendMovement.h" />
+    <ClInclude Include="timerEvent.h" />
     <ClInclude Include="world.h" />
     <ClInclude Include="worm.h" />
     <ClInclude Include="WormEvent.h" />

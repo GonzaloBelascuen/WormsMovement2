@@ -100,6 +100,7 @@ wormState STILL_LEFT[] =
 	{ HOLDED_LEFT , WALKING_LEFT , resetWormTickCount },
 	{ JUMP , JUMPING_LEFT , resetWormTickCount },
 	{ PRESSED_RIGHT , STILL_RIGHT , noAction },
+	{ HOLDED_RIGHT , STILL_RIGHT , noAction },
 { END_OF_TABLE, STILL_LEFT , noAction }
 };
 
@@ -108,6 +109,7 @@ wormState STILL_RIGHT[] =
 	{ HOLDED_RIGHT , WALKING_RIGHT , resetWormTickCount },
 	{ JUMP , JUMPING_RIGHT , resetWormTickCount },
 	{ PRESSED_LEFT , STILL_LEFT , noAction },
+	{ HOLDED_LEFT , STILL_LEFT , noAction },
 { END_OF_TABLE, STILL_RIGHT , noAction }
 };
 

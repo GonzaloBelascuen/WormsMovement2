@@ -42,10 +42,13 @@
     <ClCompile Include="observer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="eventType.cpp">
+    <ClCompile Include="WormEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WormEvent.cpp">
+    <ClCompile Include="keyboardEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timerEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,10 +74,19 @@
     <ClInclude Include="observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WormEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboardEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="eventType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WormEvent.h">
+    <ClInclude Include="timerEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,8 +1,9 @@
 #pragma once
+typedef enum { KEYBOARD_EVENT, TIMER_EVENT, QUIT } eventID;
+
 class eventType
 {
 public:
-	eventType();
-	~eventType();
+	virtual eventID getEventID() = 0;
 };
 
