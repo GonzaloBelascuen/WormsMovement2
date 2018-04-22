@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void world::refresh(void * userData)
+void world::refresh()
 {
 	al_draw_bitmap(background, 0, 0, 0);//flags(normalmente en cero, ver doc. para rotar etc)
 	al_draw_bitmap(scenario, 0, 0, 0);//flags(normalmente en cero, ver doc. para rotar etc)
@@ -23,7 +23,7 @@ world::world()
 
 	scenario = al_load_bitmap("WormsImages/Scenario.png"); //despues se puee meter todo esto en una funcion de init en dispatch
 	if (!scenario) {
-		fprintf(stderr, "failed to load background !\n");
+		fprintf(stderr, "failed to load Scenario !\n");
 	}
 
 	std::string strnum = std::to_string(1);
@@ -35,12 +35,13 @@ world::world()
 	std::string fullDir;
 
 	fullDir = dirWalk + strnum + extension;
-	std::cout << fullDir << std::endl;
+	
 
 	for (int i = 1; i != 16; i++)
 	{
 		strnum = std::to_string(i);
 		fullDir = dirWalk + strnum + extension;
+		//std::cout << fullDir << std::endl; DEBUG
 		walkImgs[i] = al_load_bitmap(fullDir.c_str()); //despues se puee meter todo esto en una funcion de init en dispatch
 		if (!walkImgs[i]) {
 			fprintf(stderr, "failed to load worm walk image !\n");
@@ -57,13 +58,14 @@ world::world()
 	{
 		strnum = std::to_string(i);
 		fullDir = dirJump + strnum + extension;
+		//std::cout << fullDir << std::endl; DEBUG
 		jumpImgs[i] = al_load_bitmap(fullDir.c_str()); //despues se puee meter todo esto en una funcion de init en dispatch
-		if (jumpImgs[i]) {
+		if (!jumpImgs[i]) {
 			fprintf(stderr, "failed to load worm jump image !\n");
 		}
 	}
 
-	worms = new worm[3];
+	worms = new worm[2];
 
 	worms[0].init(1000, 616, STILL_LEFT,walkImgs,jumpImgs);
 	worms[1].init(900, 616, STILL_LEFT, walkImgs, jumpImgs);

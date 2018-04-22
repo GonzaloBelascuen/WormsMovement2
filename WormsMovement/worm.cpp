@@ -14,60 +14,85 @@ void worm::init(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** 
 
 void worm::refresh()
 {
-	int walkSequence[50] = { 1,1,1,1, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 1 };
+	int walkSequence[45] = { 5,6,7,8,9,10,11,12,13,14,15, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15, 1,2,3,4 };
+	
+	int jumpSequence[4] = { 1,2,3,4};
+	int landingSequence[9] = {5,6,7,8,9,10,9,8,7};
 
 	if (state == WALKING_LEFT)
 	{
-		if (tickCount == 19 || tickCount == 34 || tickCount == 49)
+		if (tickCount == 11 || tickCount == 26 || tickCount == 41)
 		{
 			pos.x -= 9;
 		}
 
 		al_draw_bitmap(walkImgs[walkSequence[tickCount]], pos.x, pos.y, 0);
 		tickCount++;
-		if (tickCount == 50)
+		if (tickCount == 45)
 		{
 			this->event(END_OF_ACTION);
 		}
 	}
 	else if (state == JUMPING_LEFT)
 	{
-		pos.y = pos.y - 3.89711 + 0.24*tickCount;
-		pos.x -= 2.25;
-		if (pos.y > 616)
+		switch (subState)
 		{
-			pos.y = 616;
-			this->event(END_OF_ACTION);
-		}
-
-		al_draw_bitmap(walkImgs[1], pos.x, pos.y, 0);
+		case JUMPING:
+			al_draw_bitmap(jumpImgs[jumpSequence[tickCount]], pos.x, pos.y, 0);
+			if (tickCount == 3)
+			{
+				subState = FLYING;
+				tickCount = 0;
+			}
+			break;
+		case FLYING:
+			pos.y = pos.y - 3.89711 + 0.24*tickCount;
+			pos.x -= 2.25;
+			if (pos.y > 616)
+			{
+				pos.y = 616;
+				subState = LANDING;
+				tickCount = 0;
+			}
+			al_draw_bitmap(jumpImgs[4], pos.x, pos.y, 0);
+			break;
+		case LANDING:
+			al_draw_bitmap(jumpImgs[landingSequence[tickCount]], pos.x, pos.y, 0);
+			if (tickCount == 8)
+			{
+				this->event(END_OF_ACTION);
+				subState = JUMPING;
+				tickCount = 0;
+			}
+			break;
+		}		
 		tickCount++;
 	}
 	else if (state == STILL_LEFT)
 	{
-		al_draw_bitmap(walkImgs[1], pos.x, pos.y, 0);
+		al_draw_bitmap(walkImgs[4], pos.x, pos.y, 0);
 	}
 	else if (state == WALKING_RIGHT)
 	{
-		if (tickCount == 19 || tickCount == 34 || tickCount == 49)
+		if (tickCount == 11 || tickCount == 26 || tickCount == 41)
 		{
 			pos.x += 9;
 		}
 
 		al_draw_bitmap(walkImgs[walkSequence[tickCount]], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
 		tickCount++;
-		if (tickCount == 50)
+		if (tickCount == 45)
 		{
 			this->event(END_OF_ACTION);
 		}
 	}
 	else if (state == JUMPING_RIGHT)
 	{
-
+		
 	}
 	else if (state == STILL_RIGHT)
 	{
-		al_draw_bitmap(walkImgs[1], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
+		al_draw_bitmap(walkImgs[4], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
 	}
 }
 
@@ -102,12 +127,12 @@ worm::~worm()
 /*STATE TRANSITION DEFINITION*/
 wormState WALKING_LEFT[] =
 {
-	{ END_OF_ACTION , STILL_LEFT , noAction },
+	{ END_OF_ACTION , STILL_LEFT , resetWormTickCount },
 { END_OF_TABLE, WALKING_LEFT , noAction }
 };
 wormState WALKING_RIGHT[] =
 {
-	{ END_OF_ACTION , STILL_RIGHT , noAction },
+	{ END_OF_ACTION , STILL_RIGHT , resetWormTickCount },
 { END_OF_TABLE, WALKING_RIGHT , noAction }
 };
 
@@ -131,13 +156,13 @@ wormState STILL_RIGHT[] =
 
 wormState JUMPING_LEFT[] =
 {
-	{ END_OF_ACTION , STILL_LEFT , noAction },
+	{ END_OF_ACTION , STILL_LEFT , resetWormTickCount },
 { END_OF_TABLE, JUMPING_LEFT , noAction }
 };
 
 wormState JUMPING_RIGHT[] =
 {
-	{ END_OF_ACTION , STILL_RIGHT , noAction },
+	{ END_OF_ACTION , STILL_RIGHT , resetWormTickCount },
 { END_OF_TABLE, JUMPING_RIGHT , noAction }
 };
 

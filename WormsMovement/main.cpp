@@ -13,7 +13,7 @@
 #include <allegro5\allegro_image.h>
 
 
-void dispatch(eventType* event, void *userData, world& myWorld);
+void dispatch(eventType* event, world& myWorld);
 
 #define FPS			50.0
 #define keyboardFPS	50.0
@@ -80,10 +80,8 @@ int main(void)
 	myGameData.allegro_event_queue = allegro_event_queue;
 	myGameData.frameTimer = frameTimer;
 	myGameData.keyboardTimer = keyboardTimer;
-	myGameData.myWormEvent = NO_WORM_EVENT;
 
 	world myWorld;
-	myGameData.myWorld = &myWorld;
 
 	//RUN LOOP
 	eventGenerator evGen;
@@ -96,7 +94,7 @@ int main(void)
 		{
 			if (!evGen.isQuit())
 			{
-				dispatch(evGen.getEvent(&myGameData), &myGameData, myWorld);
+				dispatch(evGen.getEvent(&myGameData), myWorld);
 			}
 			else
 				quit = true;
@@ -113,14 +111,13 @@ int main(void)
 }
 
 
-void dispatch(eventType* event, void * userData, world& myWorld)
+void dispatch(eventType* event, world& myWorld)
 {
-	gameData *eventData = (gameData*)userData;
 
 	switch (event->getEventID())
 	{
 	case TIMER_EVENT:
-		myWorld.refresh(eventData);
+		myWorld.refresh();
 		myWorld.worms[0].refresh();
 		myWorld.worms[1].refresh();
 		al_flip_display();
@@ -155,7 +152,8 @@ void dispatch(eventType* event, void * userData, world& myWorld)
 		case ALLEGRO_KEY_UP:
 			wormID = 0;
 			validKeyPressed = true;
-			myWormEvent = JUMP;
+			if (KeyEvent->KeyAction == HELD)
+				myWormEvent = JUMP;
 			break;
 
 		case ALLEGRO_KEY_A:
@@ -179,7 +177,8 @@ void dispatch(eventType* event, void * userData, world& myWorld)
 		case ALLEGRO_KEY_W:
 			wormID = 1;
 			validKeyPressed = true;
-			myWormEvent = JUMP;
+			if (KeyEvent->KeyAction == HELD)
+				myWormEvent = JUMP;
 			break;
 		}
 

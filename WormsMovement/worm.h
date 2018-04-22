@@ -1,11 +1,15 @@
 #pragma once
 
 #include "position.h"
+#include "iostream" //FOR DEBUGGING
 
 #include <allegro5/allegro.h> 
 
+using namespace std;
+
 typedef enum { PRESSED_LEFT, HOLDED_LEFT, PRESSED_RIGHT, HOLDED_RIGHT, JUMP, END_OF_ACTION, NO_WORM_EVENT, END_OF_TABLE } wormEvent;
 typedef struct _wormState wormState;
+typedef enum { JUMPING, FLYING, LANDING } jumpingSubState;
 
 class worm
 {
@@ -15,6 +19,8 @@ private:
 	ALLEGRO_BITMAP ** walkImgs; //en el futuro esto lo vamos  hacer con listas
 	ALLEGRO_BITMAP ** jumpImgs;
 	unsigned int tickCount; //se incrementa en los refresh
+	//unsigned int subTick;
+	jumpingSubState subState = JUMPING;
 public:
 	worm();
 	~worm();

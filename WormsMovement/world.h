@@ -14,7 +14,7 @@ private:
 	unsigned int wormNumber;
 public:
 	worm * worms;
-	void refresh(void * userData);
+	void refresh();
 	world();
 	~world();
 };

@@ -8,7 +8,4 @@ struct gameData
 	ALLEGRO_TIMER *frameTimer;
 	ALLEGRO_TIMER *keyboardTimer;
 
-	wormEvent myWormEvent;
-	int wormID;
-	world * myWorld;
 };
