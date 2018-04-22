@@ -3,8 +3,8 @@
 
 void worm::init(int _xCoord, int _yCoord, wormState * _state, ALLEGRO_BITMAP ** _walkImgs, ALLEGRO_BITMAP ** _jumpImgs)
 {
-	pos.setX(_xCoord);
-	pos.setY(_yCoord);
+	pos.x = _xCoord;
+	pos.y = _yCoord;
 
 	state = _state;
 
@@ -20,44 +20,60 @@ void worm::refresh()
 	{
 		if (tickCount == 19 || tickCount == 34 || tickCount == 49)
 		{
-			pos.setX(pos.getX() - 9);
+			pos.x -= 9;
 		}
 
-		al_draw_bitmap(walkImgs[walkSequence[tickCount]], pos.getX(), pos.getY(), 0);
+		al_draw_bitmap(walkImgs[walkSequence[tickCount]], pos.x, pos.y, 0);
 		tickCount++;
 		if (tickCount == 50)
 		{
 			this->event(END_OF_ACTION);
 		}
 	}
+	else if (state == JUMPING_LEFT)
+	{
+		pos.y = pos.y - 3.89711 + 0.24*tickCount;
+		pos.x -= 2.25;
+		if (pos.y > 616)
+		{
+			pos.y = 616;
+			this->event(END_OF_ACTION);
+		}
+
+		al_draw_bitmap(walkImgs[1], pos.x, pos.y, 0);
+		tickCount++;
+	}
 	else if (state == STILL_LEFT)
 	{
-		al_draw_bitmap(walkImgs[1], pos.getX(), pos.getY(), 0);
+		al_draw_bitmap(walkImgs[1], pos.x, pos.y, 0);
 	}
 	else if (state == WALKING_RIGHT)
 	{
 		if (tickCount == 19 || tickCount == 34 || tickCount == 49)
 		{
-			pos.setX(pos.getX() + 9);
+			pos.x += 9;
 		}
 
-		al_draw_bitmap(walkImgs[walkSequence[tickCount]], pos.getX(), pos.getY(), ALLEGRO_FLIP_HORIZONTAL);
+		al_draw_bitmap(walkImgs[walkSequence[tickCount]], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
 		tickCount++;
 		if (tickCount == 50)
 		{
 			this->event(END_OF_ACTION);
 		}
 	}
+	else if (state == JUMPING_RIGHT)
+	{
+
+	}
 	else if (state == STILL_RIGHT)
 	{
-		al_draw_bitmap(walkImgs[1], pos.getX(), pos.getY(), ALLEGRO_FLIP_HORIZONTAL);
+		al_draw_bitmap(walkImgs[1], pos.x, pos.y, ALLEGRO_FLIP_HORIZONTAL);
 	}
 }
 
 void worm::event(wormEvent myWormEvent)
 {
 	int i = 0;
-
 	for (i = 0; (state[i].ev != END_OF_TABLE) && (state[i].ev != myWormEvent); i++) {}
 
 	state[i].action(this);
@@ -72,8 +88,8 @@ void worm::resetTickCount()
 
 worm::worm()
 {
-	pos.setX(0);
-	pos.setY(0);
+	pos.x = 0;
+	pos.y = 0;
 
 	state = STILL_LEFT;
 }

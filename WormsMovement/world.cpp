@@ -63,11 +63,10 @@ world::world()
 		}
 	}
 
-	worms = new worm[2];
+	worms = new worm[3];
 
 	worms[0].init(1000, 616, STILL_LEFT,walkImgs,jumpImgs);
 	worms[1].init(900, 616, STILL_LEFT, walkImgs, jumpImgs);
-
 }
 
 world::~world()

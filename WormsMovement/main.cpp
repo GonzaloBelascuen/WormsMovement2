@@ -152,6 +152,11 @@ void dispatch(eventType* event, void * userData, world& myWorld)
 			else if (KeyEvent->KeyAction == HELD)
 				myWormEvent = HOLDED_RIGHT;
 			break;
+		case ALLEGRO_KEY_UP:
+			wormID = 0;
+			validKeyPressed = true;
+			myWormEvent = JUMP;
+			break;
 
 		case ALLEGRO_KEY_A:
 			wormID = 1;
@@ -169,6 +174,12 @@ void dispatch(eventType* event, void * userData, world& myWorld)
 				myWormEvent = PRESSED_RIGHT;
 			else if (KeyEvent->KeyAction == HELD)
 				myWormEvent = HOLDED_RIGHT;
+			break;
+
+		case ALLEGRO_KEY_W:
+			wormID = 1;
+			validKeyPressed = true;
+			myWormEvent = JUMP;
 			break;
 		}
 
